@@ -1,0 +1,28 @@
+services:
+  rtvm-llvm:
+    image: custler/rtvm-llvm:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USER_ID=${USER_ID}
+        - GROUP_ID=${GROUP_ID}
+        - USER_NAME=${USER_NAME}
+    container_name: rtvm-llvm
+    user: "${USER_ID}:${GROUP_ID}"
+    volumes:
+      - ./data:/workspace/data
+      - ./scripts:/workspace/scripts
+    working_dir: /workspace/scripts
+    environment:
+      - TVM_HOME=/workspace/data/tvm
+      - Host_BUILD=/workspace/data/tvm/build
+      - Dev_BUILD=/workspace/data/tvm/build-riscv
+      - ZSTD_LIB_DIR=/usr/lib/x86_64-linux-gnu
+      - TOOLROOT=/opt/riscv
+#      - RISCV_CFLAGS=-march=rv64gcv0p7_zfh_xtheadc -mabi=lp64d -O3
+      - RISCV_CFLAGS=-march=rv64gcv_zfh_xtheadc -mabi=lp64d -O3
+      - JOBS=${JOBS}
+      - TVM_VERSION=${TVM_VERSION}
+    tty: true
+    stdin_open: true

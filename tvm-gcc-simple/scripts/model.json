@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {
+      "name": "main",
+      "inputs": [
+        {
+          "name": "x",
+          "shape": [
+            1,
+            10
+          ],
+          "dtype": "float32"
+        }
+      ],
+      "outputs": [
+        {
+          "shape": [
+            1,
+            10
+          ],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ],
+  "attrs": {
+    "device_index": 0,
+    "device_type": 1
+  }
+}
